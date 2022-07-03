@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="styles.css">
+		<title>Documentation Page</title>
+	</head>
+	<body>
+		<nav id="navbar">
+			<header>ffmpeg documentation</header>
+			<ul>
+				<a class="nav-link" href="#What_is_ffmpeg"><li>What is ffmpeg</li></a>
+				<a class="nav-link" href="#Useful_ffmpeg_Commands"><li>Useful ffmpeg Commands</li></a>
+				<a class="nav-link" href="#Supported_Codecs_and_Formats"><li>Supported Codecs and Formats</li></a>
+				<a class="nav-link" href="#Supported_Filters"><li>Supported Filters</li></a>
+				<a class="nav-link" href="#Supported_Media_and_Interfaces"><li>Supported Media and Interfaces</li></a>
+			</ul>
+		</nav>
+		<main id="main-doc">
+			<section class="main-section" id="What_is_ffmpeg">
+				<header>What is ffmpeg</header>
+				<p>ffmpeg is a very fast video and audio converter that can also grab from a live audio/video source. It can also convert between arbitrary sample rates and resize video on the fly with a high quality polyphase filter.
+					<br></br>
+				</p>
+
+			</section>
+			<section class="main-section" id="Useful_ffmpeg_Commands">
+				<header>Useful ffmpeg Commands</header>
+				<p>The typical syntax of the FFmpeg command is:</p>
+				<code>ffmpeg [global_options] {[input_file_options] -i input_url} ...
+ 				{[output_file_options] output_url} ...</code>
+ 				<p>Now we're going to go over some useful commands.</p>
+ 				<ol>
+ 					<li><h3>Getting Audio/Video File Information</h3>
+				<p>To display the details of a media file, run:</p>
+				<code>$ ffmpeg -i video.mp4</code></li>
+ 					<li><h3>Converting Video Files To Different Formats</h3>
+ 						<p>Since FFmpeg is a feature-rich and powerful audio and video converter, so It's possible to convert media files between different formats. Say for example, to convert <b>mp4</b> file to <b>avi</b> file, run:</p>
+ 						<code>$ ffmpeg -i video.mp4 video.avi</code>
+ 						<p>If you want to preserve the quality of your source video file, use '-qscale 0' parameter:</p>
+ 						<code>$ ffmpeg -i input.webm -qscale 0 output.mp4</code>
+ 					</li>
+ 					<li>
+ 						<h3>Change Resolution Of Video Files</h3>
+ 						<p>If you want to set a particular resolution to a video file, you can use following command:</p>
+ 						<code>$ ffmpeg -i input.mp4 -filter:v scale=1280:720 -c:a copy output.mp4</code>
+ 						<p>Or,</p>
+ 						<code>$ ffmpeg -i input.mp4 -s 1280x720 -c:a copy output.mp4</code>
+ 					</li>
+ 					<li>
+ 						<h3>Compressing Video Files</h3>
+ 						<p>It is always a good idea to reduce the media files' size to lower size to save the disk space.
+ 							<br>
+ 						The following command will compress and reduce the output file's size.</p>
+ 						<code>$ ffmpeg -i input.mp4 -vf scale=1280:-1 -c:v libx264 -preset veryslow -crf 24 output.mp4</code>
+ 						<p>Please note that you will lose the quality if you try to reduce the video file size. You can lower that <span class="soft_bold">crf</span> value to <span class="soft_bold">23</span> or lower if <span class="soft_bold">24</span> is too aggressive.</p>
+ 					</li>
+ 					<li>
+ 						<h3>Convert A Specific Portion Of A Video</h3>
+ 						<p>Sometimes, you might want to convert only a specific portion (duration) of the video file to different format. Say for example, the following command will convert the first 10 seconds of given video.mp4 file to video.avi format.</p>
+ 						<code>$ ffmpeg -i input.mp4 -t 10 output.avi</code>
+ 					</li>
+ 				</ol>
+			</section>
+			<section class="main-section" id="Supported_Codecs_and_Formats">
+				<header>Supported Codecs and Formats</header>
+				<h3>Image formats</h3>
+				<p>FFmpeg supports many common and some uncommon image formats.
+					<br>
+					<br>
+				The <b>PGMYUV</b> image format is a homebrewn variant of the binary (P5) PGM Netpbm format. FFmpeg also supports 16-bit depths of the PGM and PPM formats, and the binary (P7) PAM format with or without alpha channel, depth 8 bit or 16 bit for pix_fmts <i>monob, gray, gray16be, rgb24, rgb48be, ya8, rgba, rgb64be.</i></p>
+				<h3>Supported formats</h3>
+				<table>
+					<tbody>
+						<tr>
+							<th>Group</th>
+							<th>Format type</th>
+							<th>Format name</th>
+						</tr>
+						<tr>
+							<td rowspan="4">ISO/IEC/ITU-T</td>
+							<tr>
+								<td>Video</td>
+								<td>MPEG-1 Part 2, H.261 (Px64),[41] H.262/MPEG-2 Part 2, H.263,[41] MPEG-4 Part 2, H.264/MPEG-4 AVC, HEVC/H.265[30] (MPEG-H Part 2), MPEG-4 VCB (a.k.a. VP8), Motion JPEG, IEC DV video and CD+G</td>
+							</tr>
+							<tr>
+								<td>Audio</td>
+								<td>MP1, MP2, MP3, AAC, HE-AAC, MPEG-4 ALS, G.711 μ-law, G.711 A-law, G.721 (a.k.a. G.726 32k), G.722, G.722.2 (a.k.a. AMR-WB), G.723 (a.k.a. G.726 24k and 40k), G.723.1, G.726, G.729, G.729D, IEC DV audio and Direct Stream Transfer</td>
+							</tr>
+							<tr>
+								<td>Image</td>
+								<td>JPEG, Lossless JPEG, JPEG-LS, JPEG 2000, JPEG XL,[42] PNG, CCITT G3 and CCITT G4</td>
+							</tr>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+			<section class="main-section" id="Supported_Filters">
+				<header>Supported Filters</header>
+				<h3>Audio</h3>
+				<ul>
+					<li>Resampling (aresample)</li>
+					<li>Pass/Stop filters
+						<ul>
+							<li>Low-pass filter (lowpass)</li>
+							<li>High-pass filter (highpass)</li>
+							<li>All-pass filter (allpass)</li>
+							<li>Butterworth Band-pass filter (bandpass)</li>
+							<li>Butterworth Band-stop filter (bandreject)</li>
+						</ul>
+					</li>
+				</ul>
+				<h3>Video</h3>
+				<ul>
+					<li>Transformations
+						<ul>
+							<li>Cropping (crop, cropdetect)</li>
+							<li>Fading (fade)</li>
+							<li>Scaling (scale)</li>
+							<li>Padding (pad)</li>
+							<li>Rotation (rotate)</li>
+							<li>Transposition (transpose)</li>
+							<li>Others:
+								<ul>
+									<li>Lens correction (lenscorrection)</li>
+									<li>OpenCV filtering (ocv)</li>
+									<li>Perspective correction (perspective)</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+			<section class="main-section" id="Supported_Media_and_Interfaces">
+				<header>Supported Media and Interfaces</header>
+				<h3>Media</h3>
+				<ul>
+					<li>Compact disc</li>
+				</ul>
+				<h3>Physical interfaces</h3>
+				<ul>
+					<li>IEEE1394</li>
+					<li>IEC 61883</li>
+					<li>DeckLink</li>
+					<li>Brooktree</li>
+				</ul>
+				<h3>Audio IO</h3>
+				<ul>
+					<li>Advanced Linux Sound Architecture (ALSA)</li>
+					<li>Advanced Linux Sound Architecture (ALSA)</li>
+					<li>PulseAudio</li>
+					<li>JACK Audio Connection Kit (JACK; input only)</li>
+					<li>OpenAL (input only)</li>
+					<li>sndio</li>
+					<li>Core Audio (for macOS)
+						<ul>
+							<li>AVFoundation (input only)</li>
+							<li>AudioToolbox (output only)</li>
+						</ul>
+					</li>
+				</ul>
+				<h3>Video IO</h3>
+				<ul>
+					<li>Video4Linux2</li>
+					<li>Video for Windows (input only)</li>
+					<li>Windows DirectShow</li>
+					<li>Android Camera (input only)</li>
+				</ul>
+			</section>
+		</main>
+		
+	</body>
+</html>
